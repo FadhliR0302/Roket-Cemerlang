@@ -1,9 +1,10 @@
-﻿################################################################################
+################################################################################
 ## Initialization
 ################################################################################
 
 init offset = -1
-
+#variable toggle
+default show_game_menu = True
 
 ################################################################################
 ## Styles
@@ -31,6 +32,7 @@ style button:
 style button_text is gui_text:
     properties gui.text_properties("button")
     yalign 0.5
+
 
 
 style label_text is gui_text:
@@ -136,7 +138,7 @@ style window:
     yalign gui.textbox_yalign
     ysize gui.textbox_height
 
-    background Image("gui/textbox.png", xalign=0.5, yalign=1.0)
+    background Image("gui/textbox.png", xalign=0.5, yalign=0.0)
 
 style namebox:
     xpos gui.name_xpos
@@ -208,7 +210,7 @@ style input:
 screen choice(items):
     style_prefix "choice"
 
-    vbox:
+    hbox:
         for i in items:
             textbutton i.caption action i.action
 
@@ -217,12 +219,13 @@ style choice_vbox is vbox
 style choice_button is button
 style choice_button_text is button_text
 
-style choice_vbox:
+style choice_hbox:
     xalign 0.5
-    ypos 405
+    ypos 1000
     yanchor 0.5
 
     spacing gui.choice_spacing
+    
 
 style choice_button is default:
     properties gui.button_properties("choice_button")
@@ -250,13 +253,13 @@ screen quick_menu():
             yalign 1.0
 
             textbutton _("Back") action Rollback()
-            textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
+            # textbutton _("History") action ShowMenu('history')
+            # textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
+            # textbutton _("Auto") action Preference("auto-forward", "toggle")
+            # textbutton _("Save") action ShowMenu('save')
+            # textbutton _("Q.Save") action QuickSave()
+            # textbutton _("Q.Load") action QuickLoad()
+            # textbutton _("Prefs") action ShowMenu('preferences')
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
@@ -284,12 +287,66 @@ style quick_button_text:
 ##
 ## This screen is included in the main and game menus, and provides navigation
 ## to other menus, and to start the game.
-
+default about_page = False
 screen navigation():
+    
+    if main_menu:
+        if about_page == False:
+            imagebutton:
+                idle "images/Buttons/menu_button_5.png" 
+                hover "images/Buttons/menu_button_5.png" at button_effect
+                ypos 560 xalign 0.5
+                action Start()
+            imagebutton:
+                idle "images/Buttons/continue_button.png" 
+                hover "images/Buttons/continue_button.png" at button_effect
+                ypos 725 xalign 0.5
+                action Continue()
+            imagebutton:
+                idle "images/Buttons/menu_button_4.png"
+                hover "images/Buttons/menu_button_4.png" at button_effect
+                xalign 0.5 ypos 890
+                action [ShowMenu("backpack_item"), ToggleVariable("state_"), ToggleVariable("sate")]
+            imagebutton:
+                idle "images/Buttons/exit_button.png"
+                hover "images/Buttons/exit_button.png" at button_effect
+                xalign 0.975 yalign 0.95
+                action Quit(confirm=True)
+        imagebutton:
+            idle "images/Buttons/about_button.png"
+            hover "images/Buttons/about_button.png" at button_effect
+            xalign 0.025 yalign 0.95
+            action [ShowMenu("about"), ToggleVariable("about_page")]
+       
+    elif show_game_menu == True and state_ == True:       
+        imagebutton:
+            idle "images/Buttons/return_button.png"
+            hover "images/Buttons/return_button.png"at button_effect
+            xalign 0.5 ypos 155
+            action Return()
+        imagebutton:
+            idle "images/Buttons/save_journey_button.png"
+            hover "images/Buttons/save_journey_button.png"at button_effect
+            xalign 0.5 ypos 320
+            action QuickSave()
+        imagebutton:
+            idle "images/Buttons/menu_button_4.png"
+            hover "images/Buttons/menu_button_4.png" at button_effect
+            xalign 0.5 ypos 485
+            action [ShowMenu("backpack_item"), ToggleVariable("state_"), ToggleVariable("sate")]
+        imagebutton:
+            idle "images/Buttons/menu_button_3.png"
+            hover "images/Buttons/menu_button_3.png" at button_effect
+            xalign 0.5 ypos 650
+            action [ShowMenu("preferences"), ToggleVariable("show_game_menu")]
+        imagebutton:
+            idle "images/Buttons/menu_button_2.png"
+            hover "images/Buttons/menu_button_2.png" at button_effect
+            xalign 0.5 ypos 815
+            action MainMenu()
 
-    vbox:
-        style_prefix "navigation"
 
+"""
         xpos gui.navigation_xpos
         yalign 0.5
 
@@ -330,7 +387,7 @@ screen navigation():
             ## Web.
             textbutton _("Quit") action Quit(confirm=not main_menu)
 
-
+"""
 style navigation_button is gui_button
 style navigation_button_text is gui_button_text
 
@@ -349,7 +406,7 @@ style navigation_button_text:
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
 
 screen main_menu():
-
+    
     ## This ensures that any other menu screen is replaced.
     tag menu
 
@@ -358,28 +415,24 @@ screen main_menu():
     ## This empty frame darkens the main menu.
     frame:
         style "main_menu_frame"
-
+    
+    
     ## The use statement includes another screen inside this one. The actual
     ## contents of the main menu are in the navigation screen.
     use navigation
-
+    # use backpack
+    use backpack_item
     if gui.show_name:
+        pass
 
-        vbox:
-            style "main_menu_vbox"
-
-            text "[config.name!t]":
-                style "main_menu_title"
-
-            text "[config.version]":
-                style "main_menu_version"
-
-
+style main_menu_title is main_menu_text
 style main_menu_frame is empty
 style main_menu_vbox is vbox
 style main_menu_text is gui_text
-style main_menu_title is main_menu_text
 style main_menu_version is main_menu_text
+
+"""
+
 
 style main_menu_frame:
     xsize 420
@@ -403,7 +456,7 @@ style main_menu_title:
 style main_menu_version:
     properties gui.text_properties("version")
 
-
+"""
 ## Game Menu screen ############################################################
 ##
 ## This lays out the basic common structure of a game menu screen. It's called
@@ -417,8 +470,10 @@ screen game_menu(title, scroll=None, yinitial=0.0, spacing=0):
 
     style_prefix "game_menu"
 
-    if main_menu:
+    if main_menu and about_page == False:
         add gui.main_menu_background
+    elif main_menu and about_page == True:
+        add "Background/BG-Home3.png"
     else:
         add gui.game_menu_background
 
@@ -472,13 +527,13 @@ screen game_menu(title, scroll=None, yinitial=0.0, spacing=0):
                     transclude
 
     use navigation
+    if show_game_menu == False:
+        textbutton _("Return"):
+            style "return_button"
 
-    textbutton _("Return"):
-        style "return_button"
+            action [Return(), ToggleVariable("show_game_menu")]
 
-        action Return()
-
-    label title
+    
 
     if main_menu:
         key "game_menu" action ShowMenu("main_menu")
@@ -491,17 +546,9 @@ style game_menu_viewport is gui_viewport
 style game_menu_side is gui_side
 style game_menu_scrollbar is gui_vscrollbar
 
-style game_menu_label is gui_label
-style game_menu_label_text is gui_label_text
-
 style return_button is navigation_button
 style return_button_text is navigation_button_text
 
-style game_menu_outer_frame:
-    bottom_padding 45
-    top_padding 180
-
-    background "gui/overlay/game_menu.png"
 
 style game_menu_navigation_frame:
     xsize 420
@@ -520,15 +567,6 @@ style game_menu_vscrollbar:
 
 style game_menu_side:
     spacing 15
-
-style game_menu_label:
-    xpos 75
-    ysize 180
-
-style game_menu_label_text:
-    size gui.title_text_size
-    color gui.accent_color
-    yalign 0.5
 
 style return_button:
     xpos gui.navigation_xpos
@@ -553,17 +591,17 @@ screen about():
     use game_menu(_("About"), scroll="viewport"):
 
         style_prefix "about"
+        if about_page == True:
+            vbox:
 
-        vbox:
+                label "[config.name!t]"
+                text _("Version [config.version!t]\n")
 
-            label "[config.name!t]"
-            text _("Version [config.version!t]\n")
+                ## gui.about is usually set in options.rpy.
+                if gui.about:
+                    text "[gui.about!t]\n"
 
-            ## gui.about is usually set in options.rpy.
-            if gui.about:
-                text "[gui.about!t]\n"
-
-            text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
+                text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 
 style about_label is gui_label
@@ -610,85 +648,22 @@ screen file_slots(title):
             order_reverse True
 
             ## The page name, which can be edited by clicking on a button.
-            button:
-                style "page_label"
+    
+            # button:
+            #     style "page_label"
 
-                key_events True
-                xalign 0.5
-                action page_name_value.Toggle()
+            #     key_events True
+            #     xalign 0.5
+            #     action page_name_value.Toggle()
 
-                input:
-                    style "page_label_text"
-                    value page_name_value
-
-            ## The grid of file slots.
-            grid gui.file_slot_cols gui.file_slot_rows:
-                style_prefix "slot"
-
-                xalign 0.5
-                yalign 0.5
-
-                spacing gui.slot_spacing
-
-                for i in range(gui.file_slot_cols * gui.file_slot_rows):
-
-                    $ slot = i + 1
-
-                    button:
-                        action FileAction(slot)
-
-                        has vbox
-
-                        add FileScreenshot(slot) xalign 0.5
-
-                        text FileTime(slot, format=_("{#file_time}%A, %B %d %Y, %H:%M"), empty=_("empty slot")):
-                            style "slot_time_text"
-
-                        text FileSaveName(slot):
-                            style "slot_name_text"
-
-                        key "save_delete" action FileDelete(slot)
-
-            ## Buttons to access other pages.
-            vbox:
-                style_prefix "page"
-
-                xalign 0.5
-                yalign 1.0
-
-                hbox:
-                    xalign 0.5
-
-                    spacing gui.page_spacing
-
-                    textbutton _("<") action FilePagePrevious()
-                    key "save_page_prev" action FilePagePrevious()
-
-                    if config.has_autosave:
-                        textbutton _("{#auto_page}A") action FilePage("auto")
-
-                    if config.has_quicksave:
-                        textbutton _("{#quick_page}Q") action FilePage("quick")
-
-                    ## range(1, 10) gives the numbers from 1 to 9.
-                    for page in range(1, 10):
-                        textbutton "[page]" action FilePage(page)
-
-                    textbutton _(">") action FilePageNext()
-                    key "save_page_next" action FilePageNext()
-
-                if config.has_sync:
-                    if CurrentScreenName() == "save":
-                        textbutton _("Upload Sync"):
-                            action UploadSync()
-                            xalign 0.5
-                    else:
-                        textbutton _("Download Sync"):
-                            action DownloadSync()
-                            xalign 0.5
+            #     input:
+            #         style "page_label_text"
+            #         value page_name_value
 
 
 style page_label is gui_label
+
+
 style page_label_text is gui_label_text
 style page_button is gui_button
 style page_button_text is gui_button_text
@@ -702,10 +677,11 @@ style page_label:
     xpadding 75
     ypadding 5
 
-style page_label_text:
-    textalign 0.5
-    layout "subtitle"
-    hover_color gui.hover_color
+
+# style page_label_text:
+#     textalign 0.5
+#     layout "subtitle"
+#     hover_color gui.hover_color
 
 style page_button:
     properties gui.button_properties("page_button")
@@ -746,12 +722,12 @@ screen preferences():
                         textbutton _("Window") action Preference("display", "window")
                         textbutton _("Fullscreen") action Preference("display", "fullscreen")
 
-                vbox:
-                    style_prefix "check"
-                    label _("Skip")
-                    textbutton _("Unseen Text") action Preference("skip", "toggle")
-                    textbutton _("After Choices") action Preference("after choices", "toggle")
-                    textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
+                # vbox:
+                #     style_prefix "check"
+                #     label _("Skip")
+                #     textbutton _("Unseen Text") action Preference("skip", "toggle")
+                #     textbutton _("After Choices") action Preference("after choices", "toggle")
+                #     textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
 
                 ## Additional vboxes of type "radio_pref" or "check_pref" can be
                 ## added here, to add additional creator-defined preferences.
@@ -1152,7 +1128,7 @@ screen confirm(message, yes_action, no_action):
 
     style_prefix "confirm"
 
-    add "gui/overlay/confirm.png"
+    # add "gui/overlay/confirm.png"
 
     frame:
 
