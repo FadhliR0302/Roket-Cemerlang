@@ -80,13 +80,45 @@ image content_icon:
     zoom 1.3
     
 
+image content_icon1:
+    "back_pack_items/GHG Source.png"
+    xanchor 0 yanchor 0 zoom 0.1
+image content_icon2:
+    "back_pack_items/Fossil Fuel.png"
+    xanchor 0 yanchor 0 zoom 0.1
+image content_icon3:
+    "game/images/back_pack_items/GreenHouse Gasses.png"
+    xanchor 0 yanchor 0 zoom 0.1
+image content_icon4:
+    "back_pack_items/Carbon Dioxide.png"
+    xanchor 0 yanchor 0 zoom 0.1
+image content_icon5:
+    "game/images/back_pack_items/Methane.png"
+    xanchor 0 yanchor 0 zoom 0.1
+image content_icon6:
+    "back_pack_items/GHG Sink.png"
+    xanchor 0 yanchor 0 zoom 0.1
+image content_icon7:
+    "back_pack_items/Global Carbon Budget.png"
+    xanchor 0 yanchor 0 zoom 0.1
+image content_icon8:
+    "back_pack_items/Total Carbon Budget.png"
+    xanchor 0 yanchor 0 zoom 0.1
+image content_icon9:
+    "back_pack_items/TopDown Estimate.png"
+    xanchor 0 yanchor 0 zoom 0.1
+image content_icon10:
+    "back_pack_items/Lateral Fluxes.png"
+    xanchor 0 yanchor 0 zoom 0.1
+image content_icon11:
+    "back_pack_items/Bottom Up Estimate.png"
+    xanchor 0 yanchor 0 zoom 0.1
 
 screen backpack_item:
     style_prefix "itemUi"
     if state_ == False:
         add "backpack/plate.png" xalign 0.5 yalign 0.5 at bigging
         # conten isi back pack
-
         # imagebutton:
         #     xalign 0.1
         #     yalign 0.1
@@ -104,73 +136,54 @@ screen backpack_item:
                 vbox spacing 70:
                     hbox spacing 70:
                         imagebutton:
-                            # xalign 0.1
-                            # yalign 0.1
-                            idle  "content_icon"
-                            hover "content_icon" at items_backpack
+                            idle  "content_icon1"
+                            hover "content_icon1" at items_backpack 
                             action NullAction()
                         imagebutton:
-                            # xalign 0.1
-                            # yalign 0.1
-                            idle  "content_icon"
-                            hover "content_icon" at items_backpack
-                            action NullAction()  
+                            idle  "content_icon2"
+                            hover "content_icon2" at items_backpack 
+                            action NullAction()
                         imagebutton:
-                            # xalign 0.1
-                            # yalign 0.1
-                            idle  "content_icon"
-                            hover "content_icon" at items_backpack
-                            action NullAction()  
+                            idle  "content_icon3"
+                            hover "content_icon3" at items_backpack 
+                            action NullAction()
                         imagebutton:
-                            # xalign 0.1
-                            # yalign 0.1
-                            idle  "content_icon"
-                            hover "content_icon" at items_backpack
-                            action NullAction()  
+                            idle  "content_icon4"
+                            hover "content_icon4" at items_backpack 
+                            action NullAction()
+                        
                     hbox spacing 70:
                         imagebutton:
-                            # xalign 0.1
-                            # yalign 0.1
-                            idle  "content_icon"
-                            hover "content_icon" at items_backpack
-                            action NullAction()  
+                            idle  "content_icon5"
+                            hover "content_icon5" at items_backpack 
+                            action NullAction()
                         imagebutton:
-                            # xalign 0.1
-                            # yalign 0.1
-                            idle  "content_icon"
-                            hover "content_icon" at items_backpack
-                            action NullAction()  
+                            idle  "content_icon6"
+                            hover "content_icon6" at items_backpack 
+                            action NullAction()
                         imagebutton:
-                            # xalign 0.1
-                            # yalign 0.1
-                            idle  "content_icon"
-                            hover "content_icon" at items_backpack
-                            action NullAction()  
+                            idle  "content_icon7"
+                            hover "content_icon7" at items_backpack 
+                            action NullAction()
                         imagebutton:
-                            # xalign 0.1
-                            # yalign 0.1
-                            idle  "content_icon"
-                            hover "content_icon" at items_backpack
-                            action NullAction()  
+                            idle  "content_icon8"
+                            hover "content_icon8" at items_backpack 
+                            action NullAction()
+                         
                     hbox spacing 70:
                         imagebutton:
-                            # xalign 0.1
-                            # yalign 0.1
-                            idle  "content_icon"
-                            hover "content_icon" at items_backpack
-                            action NullAction()  
+                            idle  "content_icon9"
+                            hover "content_icon9" at items_backpack 
+                            action NullAction()
                         imagebutton:
-                            # xalign 0.1
-                            # yalign 0.1
-                            idle  "content_icon"
-                            hover "content_icon" at items_backpack
-                            action NullAction()  
+                            idle  "content_icon10"
+                            hover "content_icon10" at items_backpack 
+                            action NullAction()
                         imagebutton:
-                            # xalign 0.1
-                            # yalign 0.1
-                            idle  "content_icon"
-                            hover "content_icon" at items_backpack
-                            action NullAction()  
+                            idle  "content_icon11"
+                            hover "content_icon11" at items_backpack 
+                            action NullAction()
+                        
                 add "backpack/mid_line.png" zoom 0.2 yalign 0.1
                 vbox xsize 550 yalign 0.1:
                     text "" at explanation 
@@ -200,6 +213,7 @@ style itemUi_vbox:
     yalign 0.5
 style itemUi_hbox:
     xalign 0.5
+
 
 
     
