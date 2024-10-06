@@ -3,6 +3,10 @@
 image latar1  = "scene1/latar1.png"
 image latar2  = "scene1/latar2.png"
 image latar3  = "scene1/latar3.png"
+image data1 = "data/CH4.png"
+image data2 ="data/CO.png"
+image data3 ="data/H2.png"
+image data4 ="data/N2O.png"
 label scene0:
     scene latar1
     show orang_l at pos_center
@@ -22,14 +26,52 @@ label scene0:
     show orang at pos_center
     p_n "Thank you, I'm ready!"
     #img with running text
-    "{i}The world is reaching its final days everyone{/i}"
-    #img with running text
-    "{i}In just 25 years, we have bring upon this{/i}"
-    #img with running tex
-    "{i}This nightmare that will befall all of us{/i}"
-    #img with running text
-    "{i}It is with saddening heart that I say{/i}"
-    "...."
+    # "{i}The world is reaching its final days everyone{/i}"
+    # #img with running text
+    # "{i}In just 25 years, we have bring upon this{/i}"
+    # #img with running tex
+    # "{i}This nightmare that will befall all of us{/i}"
+    # #img with running text
+    # "{i}It is with saddening heart that I say{/i}"
+    # "...."
+    play movie "images/Video/Video0.webm"
+    $ renpy.pause(49, hard=True)
+    pause 49
+    stop movie
+    hide orang
+    scene latar1
+    show data1 at center_center
+    
+
+
+
+    "The steady increase in methane (CH4) concentrations from 2005 to 2022 likely reflects rising emissions from human activities like agriculture and fossil fuel extraction."
+    "Livestock farming, landfills, and energy production are key contributors. Additionally, as the planet warms, natural methane releases from wetlands and permafrost may increase, amplifying the effect."
+    "Despite concentrations staying between 1800 and 2000 ppb, this trend is concerning due to methane's strong heat-trapping ability, highlighting the need for stronger emission reduction efforts."
+    hide data1
+    show data2 at center_center
+    "Carbon dioxide (CO₂) impacts our daily lives primarily through activities like driving, heating our homes, and food choices. "
+    "For instance, driving gasoline-powered cars and using energy-intensive appliances release significant CO₂ emissions, contributing to climate change."
+    "We can reduce our carbon footprint by opting for public transportation, using energy-efficient appliances, incorporating more plant-based foods into our diets, and minimizing waste through recycling."
+    "By making these simple changes, we can collectively help lower CO₂ emissions and create a more sustainable future."
+    hide data2
+    show data3 at center_center
+    "The irregular scattering of H₂ (hydrogen) suggests varying levels of hydrogen over time."
+    "However, the slow and gradual upward trend indicates a steady increase in hydrogen concentrations despite the irregularities."
+    "This slow rise could be attributed to incremental changes in industrial or natural sources of hydrogen, such as energy production, atmospheric processes, or hydrogen-related technologies."
+    "Though the increase is gradual, the trend points to a consistent accumulation of H₂ in the atmosphere over the observed period."
+    hide data3
+    show data4 at center_center
+    "The steady increase in N₂O (nitrous oxide) indicates a gradual rise in emissions over time."
+    "The up-and-down pattern in the graph suggests seasonal or short-term fluctuations, but the overall trend shows a consistent annual increase in N₂O levels."
+    "This could be driven by growing agricultural activities, industrial emissions, or other human activities that release nitrous oxide."
+    "The regular upward movement in both the peaks and troughs points to a long-term accumulation of N₂O in the atmosphere, contributing to its role as a potent greenhouse gas."
+
+
+
+
+
+
 
     #Efek mata kedip
     "..."
@@ -127,7 +169,7 @@ label scene0:
     robot_n "You know what to do, right?"
     menu:
         "Join the Mission":
-            pass
+            jump scene2
         "Leave":
             pass
     robot_n "That's exactly what I want to hear, partner!"
