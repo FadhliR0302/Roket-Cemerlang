@@ -1,9 +1,7 @@
 #Story 6 _____
 label scene5:
-    #show
-    #bglab
-    #n
-    #pos_center
+    show robot_l at pos_right
+    show orang at pos_left
     robot_n "Did you feel the difference now?"
     p_n "Yeah! I feel like my effort aren't in vain"
     #e
@@ -58,16 +56,16 @@ label scene5:
     #n
     #pos_center
     robot_n "With how much data I have shown, do you know what unit We used to count the concentration of ghg gasses?"
-    #Option1: "In Part per million"
-        #bounce
-        #sur
-        robot_p "You have some serious great memory"
-    #Option2: "In dollar"
-        #q
-        #slump
-        robot_p "What does the dollar of ghg even mean?"
-    #Option3: "I would like to call a friend"  
-        #sm
-        robot_p "Nice try, you dont have friend"
-        p_n "Ouch"
-    #SCENE 5 COMPLETED
+    # #Option1: "In Part per million"
+    #     #bounce
+    #     #sur
+    #     robot_p "You have some serious great memory"
+    # #Option2: "In dollar"
+    #     #q
+    #     #slump
+    #     robot_p "What does the dollar of ghg even mean?"
+    # #Option3: "I would like to call a friend"  
+    #     #sm
+    #     robot_p "Nice try, you dont have friend"
+    #     p_n "Ouch"
+    # #SCENE 5 COMPLETED

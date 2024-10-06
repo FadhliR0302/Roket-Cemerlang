@@ -15,13 +15,13 @@ transform slide_right:
 transform slide_left:
     ease 0.2 xoffset -480
 transform slump:
-    ease 0.2 yoffset -70
+    ease 0.2 yoffset -30
 transform unslump:
-    ease 0.2 yoffset 20
+    ease 0.2 yoffset 30
 transform creeped_right:
-    ease 0.2 xoffset 100
+    ease 0.2 xoffset 50
 transform creeped_left:
-    ease 0.2 xoffset -100
+    ease 0.2 xoffset -50
 
 #show = Show something
 #bounce = A vertical movement

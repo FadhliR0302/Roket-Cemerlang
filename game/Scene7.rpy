@@ -20,6 +20,8 @@ label scene7:
     #sm
     #slide
     #pos_center
+    show robot at pos_right
+    show orang_l at pos_left
     robot_n "Well if it isn't the hero of the earth"
     #q
     robot_n "So, how does it feel?"
@@ -53,8 +55,8 @@ label scene7:
     robot_n "These changes that may be a hassle, that may be a challenge"
     #e
     robot_n "For a brighter and better future?"
-    #Option Yes:
-        User "Yeah, I will do it"
-        #Roll the end Credit
-        #bgb
-    #Scene 7 COMPLETED
+    # #Option Yes:
+    #     User "Yeah, I will do it"
+    #     #Roll the end Credit
+    #     #bgb
+    # #Scene 7 COMPLETED
