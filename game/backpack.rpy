@@ -51,6 +51,13 @@ transform explanation:
     yalign 0.7
     zoom 0.0
     ease 0.25 zoom 0.17
+transform explanation_add:
+    xanchor 0.5
+    yanchor 0.5
+    xalign 0.93
+    yalign 0.7
+    zoom 0.0
+    ease 0.25 zoom 0.23
 
 
 
@@ -242,7 +249,7 @@ screen backpack_item:
             add "back_pack_items/TopDown Estimate Tul.png" at explanation
         if number_expl == 10:
             add "back_pack_items/Lateral Fluxes.png" at explanation_picture
-            add "back_pack_items/Lateral Fluxes Tul.png" at explanation
+            add "back_pack_items/Lateral Fluxes Tul.png" at explanation_add
         if number_expl == 11:
             add "back_pack_items/Bottom Up Estimate.png" at explanation_picture
             add "back_pack_items/Bottom Up Estimate Tul.png" at explanation
