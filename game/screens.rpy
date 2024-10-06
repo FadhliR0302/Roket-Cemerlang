@@ -291,32 +291,33 @@ default about_page = False
 screen navigation():
     
     if main_menu:
-        if about_page == False:
+        if state_ == True:
+            if about_page == False:
+                imagebutton:
+                    idle "images/Buttons/menu_button_5.png" 
+                    hover "images/Buttons/menu_button_5.png" at button_effect
+                    ypos 560 xalign 0.5
+                    action Start()
+                imagebutton:
+                    idle "images/Buttons/continue_button.png" 
+                    hover "images/Buttons/continue_button.png" at button_effect
+                    ypos 725 xalign 0.5
+                    action Continue()
+                imagebutton:
+                    idle "images/Buttons/menu_button_4.png"
+                    hover "images/Buttons/menu_button_4.png" at button_effect
+                    xalign 0.5 ypos 890
+                    action [ShowMenu("backpack_item"), ToggleVariable("state_"), ToggleVariable("sate")]
+                imagebutton:
+                    idle "images/Buttons/exit_button.png"
+                    hover "images/Buttons/exit_button.png" at button_effect
+                    xalign 0.975 yalign 0.95
+                    action Quit(confirm=True)
             imagebutton:
-                idle "images/Buttons/menu_button_5.png" 
-                hover "images/Buttons/menu_button_5.png" at button_effect
-                ypos 560 xalign 0.5
-                action Start()
-            imagebutton:
-                idle "images/Buttons/continue_button.png" 
-                hover "images/Buttons/continue_button.png" at button_effect
-                ypos 725 xalign 0.5
-                action Continue()
-            imagebutton:
-                idle "images/Buttons/menu_button_4.png"
-                hover "images/Buttons/menu_button_4.png" at button_effect
-                xalign 0.5 ypos 890
-                action [ShowMenu("backpack_item"), ToggleVariable("state_"), ToggleVariable("sate")]
-            imagebutton:
-                idle "images/Buttons/exit_button.png"
-                hover "images/Buttons/exit_button.png" at button_effect
-                xalign 0.975 yalign 0.95
-                action Quit(confirm=True)
-        imagebutton:
-            idle "images/Buttons/about_button.png"
-            hover "images/Buttons/about_button.png" at button_effect
-            xalign 0.025 yalign 0.95
-            action [ShowMenu("about"), ToggleVariable("about_page")]
+                idle "images/Buttons/about_button.png"
+                hover "images/Buttons/about_button.png" at button_effect
+                xalign 0.025 yalign 0.95
+                action [ShowMenu("about"), ToggleVariable("about_page")]
        
     elif show_game_menu == True and state_ == True:       
         imagebutton:
